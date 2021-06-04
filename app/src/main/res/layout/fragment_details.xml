@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tiago.desafio.ui.dialog.details.DetailsNewsViewModel" />
+            type="com.tiago.desafio.ui.dialog.details.DetailsPokemonViewModel" />
 
     </data>
 

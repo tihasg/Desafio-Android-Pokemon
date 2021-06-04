@@ -26,7 +26,7 @@ class HomeViewModel(private val repository: PokemonRepository) : ViewModel(), Co
         listener.showLoading()
         launch {
             try {
-                val response = repository.getPokeMons(10)
+                val response = repository.getPokeMons(10, 0)
                 if (response.isSuccessful) {
                     repository.saveListPokemon(response.body()!!.results)
                     _pokeList.postValue(response.body()!!.results)

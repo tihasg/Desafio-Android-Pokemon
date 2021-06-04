@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsPokemonDialog : DialogFragment(), DetailsPokemonListener {
     lateinit var binding: FragmentDetailsBinding
-    private val viewModel: DetailsNewsViewModel by viewModel()
+    private val viewModel: DetailsPokemonViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

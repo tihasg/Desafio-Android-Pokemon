@@ -4,7 +4,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.tiago.desafio.repository.PokemonRepository
 
-class DetailsNewsViewModel(private val repository: PokemonRepository) : ViewModel() {
+class DetailsPokemonViewModel(private val repository: PokemonRepository) : ViewModel() {
 
     var listener: DetailsPokemonListener? = null
 

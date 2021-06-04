@@ -3,7 +3,7 @@ package com.tiago.desafio.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.tiago.desafio.network.ApiService
 import com.tiago.desafio.repository.PokemonRepository
-import com.tiago.desafio.ui.dialog.details.DetailsNewsViewModel
+import com.tiago.desafio.ui.dialog.details.DetailsPokemonViewModel
 import com.tiago.desafio.ui.dialog.error.ErrorDialogViewModel
 import com.tiago.desafio.ui.home.HomeViewModel
 import com.tiago.desafio.ui.pokemons.PokeListViewModel
@@ -25,7 +25,7 @@ val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
     viewModel { PokeListViewModel(get()) }
     viewModel { ErrorDialogViewModel() }
-    viewModel { DetailsNewsViewModel(get()) }
+    viewModel { DetailsPokemonViewModel(get()) }
 }
 
 val repositoryModule = module {

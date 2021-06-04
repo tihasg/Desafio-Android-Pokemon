@@ -36,7 +36,7 @@ class PokeListViewModel(private val repository: PokemonRepository) : ViewModel()
         launch {
             _loading.postValue(true)
             try {
-                val response = repository.getPokeMons(10)
+                val response = repository.getPokeMons(10, 0)
                 if (response.isSuccessful) {
                     _loading.postValue(false)
                     val listApi = response.body()!!.results
