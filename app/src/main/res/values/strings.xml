@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Desafio Android</string>
+    <string name="title">Lista de Pokemons</string>
+    <string name="error_api_news">Erro ao carregar lista de api</string>
+    <string name="error_title">Não foi possivel carregar as noticias</string>
+    <string name="back">Voltar</string>
+    <string name="toRead">Ler Artigo</string>
+</resources>
