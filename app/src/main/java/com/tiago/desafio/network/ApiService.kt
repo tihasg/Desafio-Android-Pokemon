@@ -11,5 +11,5 @@ interface ApiService {
     suspend fun getPokemonResponse(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): Deferred<Response<PokemonResponse>>
+    ): Response<PokemonResponse>
 }

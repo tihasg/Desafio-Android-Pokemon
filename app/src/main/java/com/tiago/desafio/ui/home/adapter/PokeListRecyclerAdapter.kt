@@ -1,4 +1,4 @@
-package com.tiago.desafio.ui.pokemons.adapter
+package com.tiago.desafio.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View

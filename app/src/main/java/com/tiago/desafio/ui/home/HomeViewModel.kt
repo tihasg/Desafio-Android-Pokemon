@@ -1,5 +1,6 @@
 package com.tiago.desafio.ui.home
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,25 +23,28 @@ class HomeViewModel(private val repository: PokemonRepository) : ViewModel(), Co
     val poke: LiveData<List<Pokemon>>
         get() = _pokeList
 
-    fun getPokemons() {
-        listener.showLoading()
+    var isLoading = View.GONE
+
+
+    fun getListApi() {
+        isLoading = View.VISIBLE
         launch {
             try {
                 val response = repository.getPokeMons(10, 0)
                 if (response.isSuccessful) {
                     repository.saveListPokemon(response.body()!!.results)
                     _pokeList.postValue(response.body()!!.results)
-                    listener.hideLoading()
+                    isLoading = View.GONE
                 } else {
                     _pokeList.postValue(arrayListOf())
-                    listener.hideLoading()
+                    isLoading = View.GONE
                     listener.apiError(
                         "Erro ao carregar lista de api"
                     )
                 }
             } catch (e: Exception) {
                 _pokeList.postValue(arrayListOf())
-                listener.hideLoading()
+                isLoading = View.GONE
                 listener.apiError(
                     e.message
                         ?: "Erro ao carregar lista de api"
@@ -48,4 +52,33 @@ class HomeViewModel(private val repository: PokemonRepository) : ViewModel(), Co
             }
         }
     }
+
+    fun getNewsPage(num: Int) {
+        launch {
+            try {
+                val response = repository.getPokeMons(10, num)
+                if (response.isSuccessful) {
+                    isLoading = View.GONE
+                    val listApi = response.body()!!.results
+
+                    val listCache = repository.getListPokemons()
+
+                    val listActual = arrayListOf<Pokemon>()
+                    listActual.addAll(listCache)
+                    listActual.addAll(listApi)
+
+                    _pokeList.postValue(listActual)
+                } else {
+                    isLoading = View.GONE
+                }
+            } catch (e: Exception) {
+                isLoading = View.GONE
+            }
+        }
+    }
+
+    fun saveClick(newsResponse:Pokemon) {
+        repository.saveClick(newsResponse)
+    }
+
 }

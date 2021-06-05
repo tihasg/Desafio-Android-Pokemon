@@ -56,7 +56,7 @@ class HomeViewModelTest {
 
         viewModel.news.observeForever(newsObserver)
 
-        viewModel.getPokemons()
+        viewModel.getListApi()
 
         verify(newsObserver).onChanged(newsResponse)
     }

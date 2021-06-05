@@ -6,7 +6,6 @@ import com.tiago.desafio.repository.PokemonRepository
 import com.tiago.desafio.ui.dialog.details.DetailsPokemonViewModel
 import com.tiago.desafio.ui.dialog.error.ErrorDialogViewModel
 import com.tiago.desafio.ui.home.HomeViewModel
-import com.tiago.desafio.ui.pokemons.PokeListViewModel
 import com.tiago.desafio.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,7 +22,6 @@ val applicationModule = module {
 
 val viewModelModule = module {
     viewModel { HomeViewModel(get()) }
-    viewModel { PokeListViewModel(get()) }
     viewModel { ErrorDialogViewModel() }
     viewModel { DetailsPokemonViewModel(get()) }
 }

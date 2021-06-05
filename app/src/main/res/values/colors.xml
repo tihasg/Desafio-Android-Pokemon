@@ -2,10 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="spaceCor1">#333434</color>
-    <color name="spaceCor2">#C75959</color>
-    <color name="spaceCor3">#E66968</color>
-    <color name="spaceCor4">#E2E1E2</color>
-    <color name="spaceCor5">#A78258</color>
+    <color name="pokeColor">#FFC107</color>
+
 
 </resources>

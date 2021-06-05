@@ -6,7 +6,7 @@ import com.tiago.desafio.network.response.Pokemon
 
 class PokemonRepository(private val apiService: ApiService) {
 
-    suspend fun getPokeMons(limit: Int, offset: Int) = apiService.getPokemonResponse(limit = limit, offset = offset).await()
+    suspend fun getPokeMons(limit: Int, offset: Int) = apiService.getPokemonResponse(limit = limit, offset = offset)
 
     fun saveListPokemon(list: List<Pokemon>) {
         Hawk.put(LISTPOKEMOS, list)

@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.DesafioAndroid" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/spaceCor2</item>
-        <item name="colorPrimaryVariant">@color/spaceCor3</item>
+        <item name="colorPrimary">@color/pokeColor</item>
+        <item name="colorPrimaryVariant">@color/pokeColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/spaceCor5</item>
-        <item name="colorSecondaryVariant">@color/spaceCor5</item>
+        <item name="colorSecondary">@color/pokeColor</item>
+        <item name="colorSecondaryVariant">@color/pokeColor</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
