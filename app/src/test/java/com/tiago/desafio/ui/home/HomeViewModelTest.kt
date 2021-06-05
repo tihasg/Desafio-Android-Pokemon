@@ -3,6 +3,8 @@ package com.tiago.desafio.ui.home
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
+import com.tiago.desafio.network.response.Pokemon
+import com.tiago.desafio.network.response.PokemonResponse
 import com.tiago.desafio.repository.PokemonRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,7 +36,7 @@ class HomeViewModelTest {
     private lateinit var repository: PokemonRepository
 
     @Mock
-    private lateinit var newsObserver: Observer<List<NewsResponse>>
+    private lateinit var pokemonListObserver: Observer<List<Pokemon>>
 
     @Mock
     private lateinit var listener: HomeListener
@@ -48,16 +50,18 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun getNews() = TestCoroutineDispatcher().runBlockingTest {
-        val newsResponse: List<NewsResponse>
-        newsResponse = arrayListOf()
+    fun getPokemons() = TestCoroutineDispatcher().runBlockingTest {
 
-        Mockito.`when`(repository.getNews(1, 1)).thenReturn(Response.success(newsResponse))
+        Mockito.`when`(repository.getPokeMons(10, 5)).thenReturn(Response.success(mockListPokemons()))
 
-        viewModel.news.observeForever(newsObserver)
+        viewModel.poke.observeForever(pokemonListObserver)
 
         viewModel.getListApi()
 
-        verify(newsObserver).onChanged(newsResponse)
+        verify(pokemonListObserver).onChanged(mockListPokemons().results)
+    }
+
+    private fun mockListPokemons(): PokemonResponse {
+        return PokemonResponse(arrayListOf())
     }
 }

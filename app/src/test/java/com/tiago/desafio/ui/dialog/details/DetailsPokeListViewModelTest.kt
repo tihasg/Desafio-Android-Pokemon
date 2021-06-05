@@ -2,6 +2,7 @@ package com.tiago.desafio.ui.dialog.details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
+import com.tiago.desafio.network.response.Pokemon
 import com.tiago.desafio.repository.PokemonRepository
 import junit.framework.TestCase
 import org.junit.Before
@@ -18,7 +19,7 @@ class DetailsPokeListViewModelTest : TestCase() {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: DetailsNewsViewModel
+    private lateinit var viewModel: DetailsPokemonViewModel
 
     @Mock
     private lateinit var repository: PokemonRepository
@@ -30,7 +31,7 @@ class DetailsPokeListViewModelTest : TestCase() {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = DetailsNewsViewModel(repository)
+        viewModel = DetailsPokemonViewModel(repository)
         viewModel.listener = listener
     }
 
@@ -42,12 +43,12 @@ class DetailsPokeListViewModelTest : TestCase() {
 
     @Test
     fun initViewModel() {
-        repository.saveClick(getMockNewResponse())
+        repository.saveClick(getMock())
         viewModel.initViewModel()
         verify(listener).getDetails(repository.getClick())
     }
 
-    private fun getMockNewResponse(): NewsResponse {
-        return NewsResponse("1", false, "", "https://www.space.com/", "", "", "", "")
+    private fun getMock(): Pokemon {
+        return Pokemon(name= "Pikachu", url = "")
     }
 }
