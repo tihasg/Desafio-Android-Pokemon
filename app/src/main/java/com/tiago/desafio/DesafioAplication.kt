@@ -28,7 +28,7 @@ class DesafioAplication : Application() {
             androidContext(this@DesafioAplication)
             androidFileProperties()
             modules(
-                    applicationModule, repositoryModule, viewModelModule
+                applicationModule, repositoryModule, viewModelModule
             )
         }
     }

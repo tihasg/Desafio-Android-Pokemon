@@ -9,6 +9,6 @@ data class Pokemon(
     val number
         get():Int {
             val data = url.split("/")
-            return data[data.size-2].toInt()
+            return data[data.size - 2].toInt()
         }
 }

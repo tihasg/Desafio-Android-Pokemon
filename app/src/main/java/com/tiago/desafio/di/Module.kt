@@ -31,9 +31,9 @@ val repositoryModule = module {
 }
 
 private fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+    HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
 
 private fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
     val okHttpClient = OkHttpClient.Builder()
@@ -45,11 +45,11 @@ private fun provideOkHttp(httpLoggingInterceptor: HttpLoggingInterceptor): OkHtt
 
 private fun provideRetrofit(okHttpClient: OkHttpClient): ApiService {
     val retrofit = Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .client(okHttpClient)
-            .build()
+        .baseUrl(Constants.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .client(okHttpClient)
+        .build()
 
     return retrofit.create(ApiService::class.java)
 }
