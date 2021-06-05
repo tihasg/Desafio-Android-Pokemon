@@ -4,5 +4,5 @@
     <string name="error_api_news">Erro ao carregar lista de api</string>
     <string name="error_title">Não foi possivel carregar as noticias</string>
     <string name="back">Voltar</string>
-    <string name="toRead">Ler Artigo</string>
+    <string name="share">Compartilhar</string>
 </resources>

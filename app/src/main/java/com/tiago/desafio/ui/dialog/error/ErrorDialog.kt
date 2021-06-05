@@ -20,9 +20,9 @@ class ErrorDialog : DialogFragment(), ErrorListener {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentErrorBinding.inflate(inflater, container, false)
         binding.viewmodel = viewModel

@@ -22,40 +22,33 @@ class HomeActivity : AppCompatActivity(), HomeListener {
     private val viewModel: HomeViewModel by viewModel()
     private lateinit var binding: ActivityHomeBinding
 
-    private var adapterNews = PokeListRecyclerAdapter(this::getClickPokemon)
+    private var adapter = PokeListRecyclerAdapter(this::getClickPokemon)
     private var numPage = 0
 
-    lateinit var listPokemonRV : RecyclerView
+    lateinit var listPokemonRV: RecyclerView
     lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        initViews()
         initViewModel()
+        initList()
+        initSearch()
     }
 
-    private fun initViews() {
+    private fun initViewModel() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        binding.viewmodel = viewModel
+        viewModel.listener = this
+    }
+
+    private fun initList() {
+        viewModel.getListApi()
+
         listPokemonRV = findViewById(R.id.listPokemons)
-        searchView = findViewById(R.id.searchView)
-        listPokemonRV.layoutManager = LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.VERTICAL }
-        listPokemonRV.adapter = adapterNews
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                adapterNews.filter.filter(p0)
-                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
-                   searchView.windowToken,
-                    0
-                )
-                return true
-            }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                adapterNews.filter.filter(query)
-                return true
-            }
-        })
+        listPokemonRV.layoutManager =
+            LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.VERTICAL }
+        listPokemonRV.adapter = adapter
 
         listPokemonRV.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -65,24 +58,38 @@ class HomeActivity : AppCompatActivity(), HomeListener {
                         1
                     ) && newState == RecyclerView.SCROLL_STATE_IDLE
                 ) {
-                    numPage +=15
-                    viewModel.getNewsPage(numPage)
+                    numPage += 10
+                    viewModel.getNextPage(numPage)
                 }
             }
         })
 
-    }
-
-    private fun initViewModel() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        binding.viewmodel = viewModel
-        viewModel.listener = this
-        viewModel.getListApi()
 
         viewModel.poke.observeForever {
-            adapterNews.items = it
-            adapterNews.newsList = it
+            adapter.items = it
+            adapter.newsList = it
+            listPokemonRV.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
+    }
+
+    private fun initSearch() {
+        searchView = findViewById(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                adapter.filter.filter(p0)
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                    searchView.windowToken,
+                    0
+                )
+                return true
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return true
+            }
+        })
     }
 
 
@@ -90,6 +97,7 @@ class HomeActivity : AppCompatActivity(), HomeListener {
         viewModel.saveClick(obj)
         DetailsPokemonDialog.newInstance().show(supportFragmentManager, DetailsPokemonDialog.TAG)
     }
+
 
     override fun apiError(string: String) {
         ErrorDialog.newInstance(string).show(supportFragmentManager, ErrorDialog.TAG)

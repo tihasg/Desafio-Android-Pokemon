@@ -25,7 +25,7 @@ class DetailsPokemonViewModel(private val repository: PokemonRepository) : ViewM
     }
 
     private fun browser() {
-        listener!!.openBrowser(repository.getClick().url)
+        listener!!.share(repository.getClick().url)
     }
 
 }

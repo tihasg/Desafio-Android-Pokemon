@@ -5,16 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.tiago.desafio.R
 import com.tiago.desafio.network.response.Pokemon
 import kotlin.properties.Delegates
 
-class PokeListRecyclerAdapter(private val getClick: (Pokemon) -> Unit) : RecyclerView.Adapter<PokeListRecyclerAdapter.ViewHolder>(), Filterable {
+class PokeListRecyclerAdapter(private val getClick: (Pokemon) -> Unit) :
+    RecyclerView.Adapter<PokeListRecyclerAdapter.ViewHolder>(), Filterable {
 
     var items: List<Pokemon> by Delegates.observable(emptyList()) { _, old, new ->
         if (old != new) notifyDataSetChanged()
@@ -38,19 +37,17 @@ class PokeListRecyclerAdapter(private val getClick: (Pokemon) -> Unit) : Recycle
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val marvel = items[position]
-        holder.bind(marvel, getClick)
+        val pokemon = items[position]
+        holder.bind(pokemon, getClick)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(pokemon: Pokemon, getClick: (Pokemon) -> Unit) {
             val name = itemView.findViewById<TextView>(R.id.textNews)
-            val image = itemView.findViewById<ImageView>(R.id.imageNews)
             val click = itemView.findViewById<ConstraintLayout>(R.id.idClick)
 
             name.text = pokemon.name
 
-            Glide.with(image.context).load(pokemon.url).into(image)
 
             click.setOnClickListener {
                 getClick(pokemon)
@@ -63,11 +60,13 @@ class PokeListRecyclerAdapter(private val getClick: (Pokemon) -> Unit) : Recycle
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
                 filterList = if (charSearch.isEmpty()) {
-                   newsList as ArrayList<Pokemon>
+                    newsList as ArrayList<Pokemon>
                 } else {
                     val resultList = ArrayList<Pokemon>()
                     for (row in newsList) {
-                        if (row.name?.toLowerCase()?.contains(constraint.toString().toLowerCase())!!) {
+                        if (row.name?.toLowerCase()
+                                ?.contains(constraint.toString().toLowerCase())!!
+                        ) {
                             resultList.add(row)
                         }
                     }

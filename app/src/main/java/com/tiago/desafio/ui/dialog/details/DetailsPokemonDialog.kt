@@ -1,14 +1,12 @@
 package com.tiago.desafio.ui.dialog.details
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import com.bumptech.glide.Glide
 import com.tiago.desafio.R
 import com.tiago.desafio.databinding.FragmentDetailsBinding
 import com.tiago.desafio.network.response.Pokemon
@@ -55,15 +53,15 @@ class DetailsPokemonDialog : DialogFragment(), DetailsPokemonListener {
         dialog?.dismiss()
     }
 
-    override fun openBrowser(url: String?) {
-        url?.let {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        }
+    override fun share(url: String?) {
+        val i = Intent(Intent.ACTION_SEND)
+        i.type = "text/plain"
+        i.putExtra(Intent.EXTRA_SUBJECT, "Desafio Android Pokemon")
+        i.putExtra(Intent.EXTRA_TEXT, url)
+        startActivity(Intent.createChooser(i, "Share Pokemon"))
     }
 
     override fun getDetails(pokemon: Pokemon) {
-        binding.textViewTitle.text = pokemon.name
-        Glide.with(binding.imageView).load(pokemon.url).into(binding.imageView)
+        binding.textViewDescription.text = pokemon.name
     }
 }
