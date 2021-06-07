@@ -2,7 +2,6 @@ package com.tiago.desafio.ui.dialog.details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
-import com.tiago.desafio.network.response.Pokemon
 import com.tiago.desafio.repository.PokemonRepository
 import junit.framework.TestCase
 import org.junit.Before

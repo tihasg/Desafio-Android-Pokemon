@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tiago.desafio.R
 import com.tiago.desafio.databinding.ActivityHomeBinding
-import com.tiago.desafio.network.response.Pokemon
+import com.tiago.desafio.model.Pokemon
 import com.tiago.desafio.ui.dialog.details.DetailsPokemonDialog
 import com.tiago.desafio.ui.dialog.error.ErrorDialog
 import com.tiago.desafio.ui.home.adapter.PokeListRecyclerAdapter

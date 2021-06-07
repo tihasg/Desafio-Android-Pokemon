@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tiago.desafio.R
 import com.tiago.desafio.databinding.FragmentDetailsBinding
-import com.tiago.desafio.network.response.Pokemon
+import com.tiago.desafio.model.Ability
+import com.tiago.desafio.model.Pokemon
+import com.tiago.desafio.ui.dialog.adapter.PokemonAbilityListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsPokemonDialog : DialogFragment(), DetailsPokemonListener {
@@ -42,6 +47,22 @@ class DetailsPokemonDialog : DialogFragment(), DetailsPokemonListener {
 
     private fun initViewModel() {
         viewModel.initViewModel()
+        viewModel.pokemon.observeForever {
+            binding.textViewDescription.text = it.name
+            binding.tvHeight.text = "height: ${it.height.toString()}"
+            binding.tvWeight.text = "weight: ${it.weight.toString()}"
+            Glide.with(binding.imageView).load(it.sprites?.frontImage).into(binding.imageView)
+            setPokemonAbilityListAdapter(binding.rvAbilities, it.abilities)
+        }
+    }
+
+    private fun setPokemonAbilityListAdapter(recyclerView: RecyclerView?, abilities: ArrayList<Ability>?) {
+        recyclerView?.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        recyclerView?.adapter = abilities?.let { PokemonAbilityListAdapter(it, requireContext()) }
     }
 
     companion object {
@@ -59,9 +80,5 @@ class DetailsPokemonDialog : DialogFragment(), DetailsPokemonListener {
         i.putExtra(Intent.EXTRA_SUBJECT, "Desafio Android Pokemon")
         i.putExtra(Intent.EXTRA_TEXT, url)
         startActivity(Intent.createChooser(i, "Share Pokemon"))
-    }
-
-    override fun getDetails(pokemon: Pokemon) {
-        binding.textViewDescription.text = pokemon.name
     }
 }

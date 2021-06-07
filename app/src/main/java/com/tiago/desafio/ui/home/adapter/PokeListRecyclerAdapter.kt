@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.tiago.desafio.R
-import com.tiago.desafio.network.response.Pokemon
+import com.tiago.desafio.model.Pokemon
 import kotlin.properties.Delegates
 
 class PokeListRecyclerAdapter(private val getClick: (Pokemon) -> Unit) :

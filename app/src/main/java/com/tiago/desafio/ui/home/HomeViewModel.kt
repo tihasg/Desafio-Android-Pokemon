@@ -3,7 +3,7 @@ package com.tiago.desafio.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tiago.desafio.network.response.Pokemon
+import com.tiago.desafio.model.Pokemon
 import com.tiago.desafio.repository.PokemonRepository
 import com.tiago.desafio.utils.Constants.OFFSET
 import com.tiago.desafio.utils.Constants.PAGE_LIMIT
