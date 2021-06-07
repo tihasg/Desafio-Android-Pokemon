@@ -5,7 +5,7 @@ import com.tiago.desafio.model.Ability
 import com.tiago.desafio.model.Move
 import com.tiago.desafio.model.Sprite
 
-class PokemonDetailResponse  {
+class PokemonDetailResponse{
 
     @SerializedName("id")
     var id: Int? = null

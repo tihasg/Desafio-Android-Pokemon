@@ -28,7 +28,7 @@ class DetailsPokemonViewModel(private val repository: PokemonRepository) : ViewM
         getDetailsApi(repository.getClick().name ?: "")
     }
 
-    private fun getDetailsApi(name: String) {
+     fun getDetailsApi(name: String) {
         launch {
             try {
                 val response = repository.getPokeDetails(name)
@@ -37,7 +37,7 @@ class DetailsPokemonViewModel(private val repository: PokemonRepository) : ViewM
                     repository.savePokemon(response.body()!!)
                 }
             } catch (e: Exception) {
-                print(e.message)
+                _pokemon.postValue(null)
             }
         }
     }

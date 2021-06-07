@@ -3,6 +3,7 @@ package com.tiago.desafio.ui.home
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
+import com.tiago.desafio.model.Pokemon
 import com.tiago.desafio.network.response.PokemonResponse
 import com.tiago.desafio.repository.PokemonRepository
 import kotlinx.coroutines.Dispatchers
